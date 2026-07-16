@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cosmic Portfolio Design System */
+
+@layer base {
+  :root {
+    /* Yellow-Black Background Colors */
+    --background: 45 15% 5%;
+    --foreground: 60 100% 95%;
+
+    /* Dark Cards */
+    --card: 45 10% 8%;
+    --card-foreground: 60 100% 90%;
+
+    /* Primary Yellow */
+    --primary: 45 100% 65%;
+    --primary-foreground: 45 15% 5%;
+
+    /* Secondary Gold */
+    --secondary: 38 100% 50%;
+    --secondary-foreground: 45 15% 5%;
+
+    /* Muted Dark */
+    --muted: 45 8% 15%;
+    --muted-foreground: 45 15% 65%;
+
+    /* Accent Gold */
+    --accent: 50 100% 70%;
+    --accent-foreground: 45 15% 5%;
+
+    /* Destructive Red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 60 100% 95%;
+
+    /* Borders */
+    --border: 45 10% 20%;
+    --input: 45 8% 15%;
+    --ring: 45 100% 65%;
+
+    --radius: 0.75rem;
+
+    /* Yellow-Black Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(45 100% 65%), hsl(50 100% 70%));
+    --gradient-nebula: linear-gradient(180deg, hsl(38 100% 50%), hsl(45 100% 65%));
+    --gradient-solar: radial-gradient(circle, hsl(45 100% 70%), hsl(40 100% 60%));
+    --gradient-planet: linear-gradient(45deg, hsl(42 100% 50%), hsl(48 100% 65%));
+
+    /* Yellow Shadows */
+    --shadow-cosmic: 0 25px 50px -12px hsl(45 100% 65% / 0.25);
+    --shadow-nebula: 0 20px 40px -10px hsl(38 100% 50% / 0.3);
+    --shadow-glow: 0 0 30px hsl(45 100% 65% / 0.4);
+
+    /* Animation Timings */
+    --transition-cosmic: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-planet: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Star field animation background */
+  .cosmic-bg {
+    background: 
+      radial-gradient(circle at 20% 50%, hsl(45 100% 65% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(38 100% 50% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsl(50 100% 70% / 0.1) 0%, transparent 50%),
+      hsl(var(--background));
+  }
+
+  /* Floating particles animation */
+  .particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: hsl(60 100% 95%);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  * {
+    @apply border-border;
+  }
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground font-space overflow-x-hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron;
+    overflow-wrap: anywhere;
+  }
+  p, span, div, li, a {
+    overflow-wrap: anywhere;
+  }
+  img, svg, video, canvas, figure {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@layer components {
+  /* Cosmic Button Variants */
+  .btn-cosmic {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground 
+           px-8 py-4 rounded-full font-semibold tracking-wide
+           shadow-cosmic hover:shadow-glow transition-all duration-500
+           hover:scale-105 active:scale-95;
+  }
+
+  .btn-nebula {
+    @apply bg-gradient-to-r from-secondary to-primary text-primary-foreground
+           px-6 py-3 rounded-full font-medium
+           border border-primary/20 hover:border-primary/40
+           transition-all duration-300 hover:shadow-nebula;
+  }
+
+  .btn-planet {
+    @apply bg-card/50 backdrop-blur-sm text-foreground
+           px-6 py-3 rounded-full border border-border
+           hover:bg-card/80 hover:border-primary/30
+           transition-all duration-300;
+  }
+
+  /* Cosmic Cards */
+  .card-cosmic {
+    @apply bg-card/30 backdrop-blur-md border border-border/50
+           rounded-2xl p-6 shadow-cosmic
+           hover:bg-card/50 hover:border-primary/20
+           transition-all duration-500 hover:shadow-glow;
+  }
+
+  .card-planet {
+    @apply bg-gradient-to-br from-card/40 to-card/20 backdrop-blur-lg
+           border border-primary/10 rounded-3xl p-8
+           hover:border-primary/30 hover:shadow-cosmic
+           transition-all duration-700 hover:scale-[1.02];
+  }
+
+  /* Text Gradients */
+  .text-cosmic {
+    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+  }
+
+  .text-nebula {
+    @apply bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent;
+  }
+
+  /* Glow Effects */
+  .glow-cosmic {
+    filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.5));
+  }
+
+  .glow-nebula {
+    filter: drop-shadow(0 0 15px hsl(var(--secondary) / 0.4));
+  }
+
+  /* Planet Animation */
+  .planet-orbit {
+    animation: orbit 20s infinite linear;
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+  }
+
+  /* Scroll animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
